@@ -1,6 +1,7 @@
 const mongoose=require('mongoose');
 const router=require('express').Router();
 const Courses=require('../CourseApp/model/Courses');
+const verifyToken = require('./verifyToken');
 
 router.post('/courses',async(req,res)=>{
         const courseExist=await Courses.findOne({title:req.body.title});
@@ -21,7 +22,7 @@ router.post('/courses',async(req,res)=>{
        }
 });
 
-router.get('/courses',async(req,res)=>{
+router.get('/courses',verifyToken,async(req,res)=>{
     const courses=await Courses.find({});
     res.send(courses);
 });
