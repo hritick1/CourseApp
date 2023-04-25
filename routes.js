@@ -1,6 +1,6 @@
 const mongoose=require('mongoose');
 const router=require('express').Router();
-const Courses=require('../CourseApp/model/Courses');
+const Courses=require('./model/Courses');
 const verifyToken = require('./verifyToken');
 
 router.post('/courses',async(req,res)=>{
