@@ -13,7 +13,7 @@ router.post('/courses',async(req,res)=>{
         title:req.body.title,
         description:req.body.description
        });
-
+       
        try{
         const saveData=await course.save();
         res.sendAll("Course Added Successfully");
@@ -23,6 +23,7 @@ router.post('/courses',async(req,res)=>{
 });
 
 router.get('/courses',verifyToken,async(req,res)=>{
+    // console.log(req.cookies.myCookie);
     const courses=await Courses.find({});
     res.send(courses);
 });
