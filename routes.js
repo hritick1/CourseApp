@@ -22,7 +22,7 @@ router.post('/courses',async(req,res)=>{
        }
 });
 
-router.get('/courses',verifyToken,async(req,res)=>{
+router.get('/courses',async(req,res)=>{
     // console.log(req.cookies.myCookie);
     const courses=await Courses.find({});
     res.send(courses);
