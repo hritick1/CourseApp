@@ -1,9 +1,10 @@
 const router=require('express').Router();
-const CourseController=require('./controller/CourseController');
+const CourseController=require('../controller/CourseController');
+const verifyToken=require('../middleware/verifyToken');
 
 router.route('/courses')
           .post(CourseController.addCourse)
-          .get(CourseController.getAllCourses);
+          .get(verifyToken,CourseController.getAllCourses);
 
 router.route('/courses/:_id')
              .get(CourseController.getCourse)

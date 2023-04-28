@@ -1,5 +1,4 @@
 const Courses=require('../model/Courses');
-const verifyToken = require('../verifyToken');
 
 
 const addCourse=async(req,res)=>{
