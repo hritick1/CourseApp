@@ -9,12 +9,12 @@ const handleLogout=async(req,res)=>{
 
    const foundUser=await User.findOne({refreshToken:refreshToken});
    if(!foundUser) {
-    res.clearCookie('jwt',{httpOnly:true});
+    res.clearCookie('jwt',{httpOnly:true,sameSite:'None',secure:true});
     return res.status(204).send("Success");}
 
  
        await User.findByIdAndUpdate(foundUser._id,{refreshToken:''});
-       res.clearCookie('jwt',{httpOnly:true});
+       res.clearCookie('jwt',{httpOnly:true,sameSite:'None',secure:true});
        res.status(204).send("Success");
 
 

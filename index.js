@@ -9,12 +9,14 @@ const cookieParser=require('cookie-parser');
 const verifyToken=require('./middleware/verifyToken');
 const refresh=require('./routes/refresh');
 const logout=require('./routes/logout');
+const credentials=require('./middleware/credentials');
+const corsOptions=require('./config/corsOptions');
 
 dotenv.config();
 
 mongoose.connect(process.env.DB,{dbName:"CourseApp"});
-
-app.use(cors());
+app.use(credentials);
+app.use(cors(corsOptions));
 
 app.use(cookieParser());
 app.use(express.json());

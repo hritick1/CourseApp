@@ -49,7 +49,7 @@ const login=async(req,res)=>{
         const refreshToken=jwt.sign({id:foundUser._id},process.env.REFRESH_TOKEN_SECRET,{expiresIn:'1d'});
         
         await User.findByIdAndUpdate(foundUser._id,{refreshToken:refreshToken});
-        res.cookie('jwt',refreshToken,{httpOnly:true,maxAge:24*60*60*1000});
+        res.cookie('jwt',refreshToken,{httpOnly:true,sameSite:'None',secure:true,maxAge:24*60*60*1000});
         res.json({accessToken});
 }
 
