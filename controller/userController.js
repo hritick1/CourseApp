@@ -7,7 +7,7 @@ require('dotenv').config();
 const register=async(req,res)=>{
     //validating the data 
   const {error}=registerValidation(req.body);
-  if(error) return res.status(400).send("Fuck"+error.details[0].message);
+  if(error) return res.status(400).send(error.details[0].message);
 
  //checking if the user exists
   const emailExist=await User.findOne({email:req.body.email});
@@ -28,7 +28,7 @@ try{
    await user.save();
    res.send("User Added with id: "+user._id);
 }
-catch(err){res.status(400).send("Hello"+err);}
+catch(err){res.status(400).send(err);}
 
 
 }
@@ -49,7 +49,7 @@ const login=async(req,res)=>{
         const refreshToken=jwt.sign({id:foundUser._id},process.env.REFRESH_TOKEN_SECRET,{expiresIn:'1d'});
         
         await User.findByIdAndUpdate(foundUser._id,{refreshToken:refreshToken});
-        res.cookie('jwt',refreshToken,{httpOnly:true,sameSite:'None',secure:true,maxAge:24*60*60*1000});
+        res.cookie('jwt',refreshToken,{httpOnly:true,sameSite:'none',secure:true,maxAge:24*60*60*1000});
         res.json({accessToken});
 }
 
