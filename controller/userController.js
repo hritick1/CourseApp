@@ -45,7 +45,7 @@ const login=async(req,res)=>{
     if(!validPassword) return res.status(400).send("Invalid Email or Password");
     else { 
 
-        const accessToken=jwt.sign({id:foundUser._id},process.env.ACCESS_TOKEN_SECRET,{expiresIn:'60s'});
+        const accessToken=jwt.sign({id:foundUser._id},process.env.ACCESS_TOKEN_SECRET,{expiresIn:'300s'});
         const refreshToken=jwt.sign({id:foundUser._id},process.env.REFRESH_TOKEN_SECRET,{expiresIn:'1d'});
         
         await User.findByIdAndUpdate(foundUser._id,{refreshToken:refreshToken});
