@@ -17,7 +17,7 @@ const handleRefreshToken=async(req,res)=>{
    jwt.verify(refreshToken,process.env.REFRESH_TOKEN_SECRET,(err,decoded)=>{
            
     if(err || foundUser._id!=decoded.id) return res.sendStatus(403);
-    const accessToken=jwt.sign({id:decoded.id},process.env.ACCESS_TOKEN_SECRET,{expiresIn:'60s'});
+    const accessToken=jwt.sign({id:decoded.id},process.env.ACCESS_TOKEN_SECRET,{expiresIn:'300s'});
     res.json({accessToken});
    });
 
